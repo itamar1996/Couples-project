@@ -1,0 +1,16 @@
+[
+  {
+    "id": "1",
+    "playerxid": "1",
+    "playeryid": "2",
+    "status": "finished",
+    "winner": "1"
+  },
+  {
+    "playerxid": "d5666d83-539d-4437-9e7d-d8d0f4563d90",
+    "playeryid": "acfa11d9-1095-4851-a8c1-6e2a0d5704d3",
+    "id": "6bcc9278-3694-4a08-a01c-f62f5d65bd07",
+    "status": "ongoing",
+    "winner": "draw"
+  }
+]
