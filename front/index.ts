@@ -2,6 +2,10 @@
 
 
 const divMainConnction:HTMLDivElement = document.querySelector(".connction")!
+const divListPlayer:HTMLDivElement = document.createElement("div")!
+divListPlayer.classList.add("list-player");
+divListPlayer.textContent = "List Player";
+
 
 
 const h1MainConnction: HTMLHeadingElement = document.createElement("h1");
@@ -24,7 +28,13 @@ const divbtn = document.createElement("div");
 divbtn.classList.add("btn-div")
 
 const buttonLogin = document.createElement("button");
-
+buttonLogin.addEventListener("click",async () =>{
+    console.log("Login")
+    const result = await fetch(`http://localhost:3000/users`)
+    const data = await result.json();
+    console.log(data)
+    
+})
 buttonLogin.textContent = "Login";
 const buttonRegister = document.createElement("button");
 
@@ -34,12 +44,8 @@ buttonRegister.addEventListener("click", () =>{
     const divConnect = document.querySelector(".connction")
     divConnect?.remove()
     section.classList.remove("section");
-    section.classList.add("btn-section");
-
-
-
-
-    
+    section.classList.add("btn-section");  
+    section.append(divListPlayer)
 
 })
 divbtn.append(buttonRegister,buttonLogin)
