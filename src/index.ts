@@ -20,5 +20,7 @@ app.use('/games',gameController)
 
 
 app.listen(process.env.port, () => console.log(
+
+    
     `Server is up and running, feel free to visit at http://localhost:${process.env.PORT}`
 ))
