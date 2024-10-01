@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const userRoute_1 = require("../routes/userRoute");
+// import verifyUser from "../middllwhers/verifyUser";
+const router = (0, express_1.Router)();
+router.post("/signup", userRoute_1.handleSignUp);
+router.get('/', userRoute_1.handleGetAllUsers);
+router.get('./:id', () => { });
+router.post('./', () => { });
+router.patch('./:id', () => { });
+router.delete('./:id', () => { });
+exports.default = router;
