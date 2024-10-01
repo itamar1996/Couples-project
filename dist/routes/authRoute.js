@@ -17,6 +17,7 @@ const authService_1 = __importDefault(require("../services/authService"));
 const handleSigninRequset = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield authService_1.default.login(req.body);
+        res.cookie('auth_token', result.data, { httpOnly: true });
         res.cookie("token", result.data).status(result.status).json(result);
     }
     catch (error) {

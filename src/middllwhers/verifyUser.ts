@@ -9,7 +9,8 @@ const verifyUser = async (
   ): Promise<void> => {
     try {
       // @ts-ignore
-      const token: string = req.headers?.["authorization"] || "";
+      const token: string = String (req.cookies?.auth_token || "");
+      console.log("Token from cookie:", token);
         const decoded: TokenPayloadDTO = jwt.verify(
         token,
         process.env.JWT_SECRET!

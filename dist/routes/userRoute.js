@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleSignUp = void 0;
+exports.handleGetAllUsers = exports.handleSignUp = void 0;
 const userService_1 = __importDefault(require("../services/userService"));
 const handleSignUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -24,3 +24,13 @@ const handleSignUp = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.handleSignUp = handleSignUp;
+const handleGetAllUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const result = yield userService_1.default.getAll();
+        res.status(result.status).json(result.data);
+    }
+    catch (error) {
+        console.log(error);
+    }
+});
+exports.handleGetAllUsers = handleGetAllUsers;

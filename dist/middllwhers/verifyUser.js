@@ -17,7 +17,8 @@ const verifyUser = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
     var _a;
     try {
         // @ts-ignore
-        const token = ((_a = req.headers) === null || _a === void 0 ? void 0 : _a["authorization"]) || "";
+        const token = String(((_a = req.cookies) === null || _a === void 0 ? void 0 : _a.auth_token) || "");
+        console.log("Token from cookie:", token);
         const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
         console.log(decoded);
         //@ts-ignore

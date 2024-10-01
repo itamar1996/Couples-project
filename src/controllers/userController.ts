@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { handleSignUp } from "../routes/userRoute";
+import { handleGetAllUsers, handleSignUp } from "../routes/userRoute";
 // import verifyUser from "../middllwhers/verifyUser";
 
 const router : Router = Router();
 
 router.post("/signup", handleSignUp);
 
-router.get('./',()=>{})
+router.get('/',handleGetAllUsers)
 
 router.get('./:id',()=>{})
 

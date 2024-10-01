@@ -9,6 +9,7 @@ export const handleSigninRequset = async(
 ):Promise<void>=>{
     try {
         const result = await AuthService.login(req.body);
+        res.cookie('auth_token', result.data, { httpOnly: true });
         res.cookie("token",result.data).status(result.status!).json(result);   
     } catch (error) {
         

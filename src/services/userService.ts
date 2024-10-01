@@ -37,4 +37,22 @@ export default class UserService{
             }
         }
     }
+    public static async getAll():Promise<ResponseData< User[]>>{
+        try {
+            const users:User[] = await getFilleData("users") as User[]
+            return {
+                err:false,
+                message:"user sign up ",
+                status:201,
+                data:users
+
+            }
+        } catch (error) {
+            return {
+                err:true,
+                status:500,
+                data:error
+            }
+        }
+    }
 }

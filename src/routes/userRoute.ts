@@ -13,5 +13,16 @@ export const handleSignUp = async (
         console.log(error);
     }
 };
+export const handleGetAllUsers = async (
+    req:Request,
+    res :Response
+): Promise<void> => {
+    try {
+        const result =  await UserService.getAll();
+        res.status(result.status).json(result.data)
+    } catch (error) {
+        console.log(error);
+    }
+};
 
 

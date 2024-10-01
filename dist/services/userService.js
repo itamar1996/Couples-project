@@ -48,5 +48,25 @@ class UserService {
             }
         });
     }
+    static getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const users = yield (0, filleDataLayer_1.getFilleData)("users");
+                return {
+                    err: false,
+                    message: "user sign up ",
+                    status: 201,
+                    data: users
+                };
+            }
+            catch (error) {
+                return {
+                    err: true,
+                    status: 500,
+                    data: error
+                };
+            }
+        });
+    }
 }
 exports.default = UserService;
