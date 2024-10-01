@@ -14,11 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const filleDataLayer_1 = require("../config/filleDataLayer");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const user_1 = __importDefault(require("../types/models/user"));
 class AuthService {
-    static login(userData) {
+    static login(userData1) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const { username, password } = userData;
+                const { username, password } = userData1;
                 if (!password || !username) {
                     return {
                         err: true,
@@ -26,8 +27,18 @@ class AuthService {
                         status: 400
                     };
                 }
-                const users = yield (0, filleDataLayer_1.getFilleData)("players");
-                const user = users.find(u => u.username == username);
+                let users = yield (0, filleDataLayer_1.getFilleData)('users');
+                const userData = users.find(u => u.username == username);
+                if (!userData) {
+                    return {
+                        err: true,
+                        message: "user not found",
+                        status: 400
+                    };
+                }
+                const user = new user_1.default(userData.username);
+                user.id = userData.id;
+                user["password"] = userData["password"];
                 if (!user) {
                     return {
                         err: true,

@@ -12,30 +12,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveFilleData = exports.getFilleData = void 0;
-const promises_1 = __importDefault(require("fs/promises"));
-const getFilleData = (resource) => __awaiter(void 0, void 0, void 0, function* () {
+exports.handleSignUp = void 0;
+const userService_1 = __importDefault(require("../services/userService"));
+const handleSignUp = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield promises_1.default.readFile(`${__dirname}/../../data/${resource}.json`, "utf-8");
-        const parsedata = JSON.parse(data);
-        return parsedata;
+        const result = yield userService_1.default.signup(req.body);
+        res.status(result.status).json(result);
     }
     catch (error) {
         console.log(error);
     }
 });
-exports.getFilleData = getFilleData;
-const saveFilleData = (resource, data) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const stringdata = JSON.stringify(data, null, 2);
-        yield promises_1.default.writeFile(`${__dirname}/../../data/${resource}.json`, stringdata, {
-            encoding: 'utf-8'
-        });
-        return true;
-    }
-    catch (error) {
-        console.log(error);
-        return false;
-    }
-});
-exports.saveFilleData = saveFilleData;
+exports.handleSignUp = handleSignUp;

@@ -12,30 +12,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveFilleData = exports.getFilleData = void 0;
-const promises_1 = __importDefault(require("fs/promises"));
-const getFilleData = (resource) => __awaiter(void 0, void 0, void 0, function* () {
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const verifyUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
-        const data = yield promises_1.default.readFile(`${__dirname}/../../data/${resource}.json`, "utf-8");
-        const parsedata = JSON.parse(data);
-        return parsedata;
+        // @ts-ignore
+        const token = ((_a = req.headers) === null || _a === void 0 ? void 0 : _a["authorization"]) || "";
+        const decoded = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
+        console.log(decoded);
+        //@ts-ignore
+        req.user = decoded;
+        next();
     }
-    catch (error) {
-        console.log(error);
+    catch (err) {
+        console.log(err);
+        res.sendStatus(401);
     }
 });
-exports.getFilleData = getFilleData;
-const saveFilleData = (resource, data) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const stringdata = JSON.stringify(data, null, 2);
-        yield promises_1.default.writeFile(`${__dirname}/../../data/${resource}.json`, stringdata, {
-            encoding: 'utf-8'
-        });
-        return true;
-    }
-    catch (error) {
-        console.log(error);
-        return false;
-    }
-});
-exports.saveFilleData = saveFilleData;
+exports.default = verifyUser;

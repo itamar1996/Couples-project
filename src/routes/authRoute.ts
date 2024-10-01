@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-// import AuthService from "../services/authService";
 import LoginDTO from "../types/DTO/loginDTO";
 import AuthService from "../services/authService";
 

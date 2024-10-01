@@ -12,30 +12,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.saveFilleData = exports.getFilleData = void 0;
-const promises_1 = __importDefault(require("fs/promises"));
-const getFilleData = (resource) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const data = yield promises_1.default.readFile(`${__dirname}/../../data/${resource}.json`, "utf-8");
-        const parsedata = JSON.parse(data);
-        return parsedata;
+const uuid_1 = require("uuid");
+const bcrypt_1 = __importDefault(require("bcrypt"));
+class User {
+    constructor(username) {
+        this.username = username;
+        this.id = (0, uuid_1.v4)();
     }
-    catch (error) {
-        console.log(error);
-    }
-});
-exports.getFilleData = getFilleData;
-const saveFilleData = (resource, data) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const stringdata = JSON.stringify(data, null, 2);
-        yield promises_1.default.writeFile(`${__dirname}/../../data/${resource}.json`, stringdata, {
-            encoding: 'utf-8'
+    hashPassword(_password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            this.password = yield bcrypt_1.default.hash(_password, 10);
         });
-        return true;
     }
-    catch (error) {
-        console.log(error);
-        return false;
+    comparePassword(_password) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield bcrypt_1.default.compare(_password, this.password || "");
+        });
     }
-});
-exports.saveFilleData = saveFilleData;
+}
+exports.default = User;
