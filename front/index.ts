@@ -1,8 +1,8 @@
 
 
 
-const divMainConnction:HTMLDivElement = document.createElement("div");
-divMainConnction.classList.add("connction")
+const divMainConnction:HTMLDivElement = document.querySelector(".connction")!
+
 
 const h1MainConnction: HTMLHeadingElement = document.createElement("h1");
 h1MainConnction.textContent = "New registration";
@@ -29,40 +29,38 @@ buttonLogin.textContent = "Login";
 const buttonRegister = document.createElement("button");
 
 buttonRegister.textContent = "Register";
+buttonRegister.addEventListener("click", () =>{
+    const section:Element = document.querySelector(".section")!;
+    const divConnect = document.querySelector(".connction")
+    divConnect?.remove()
+    section.classList.remove("section");
+    section.classList.add("btn-section");
+
+
+
+
+    
+
+})
 divbtn.append(buttonRegister,buttonLogin)
-form.append(inputUsername,inputPassword,divbtn);
+form.append(inputUsername,inputPassword);
 
-divMainConnction.appendChild(form);
+divMainConnction.append(form,divbtn);
 
-// divMainConnction.appendChild(h1MainConnction)
-const formCreatenew = document.createElement("form");
-// formCreatenew.classList.add("form-createnew");
+const divforTikTuk = document.createElement("div");
 
-// const inputEmail = document.createElement("input");
+divforTikTuk.classList.add("tik-tak");
 
-// inputEmail.setAttribute("type", "text");
+const spanTikTak = document.createElement("span");
 
-// inputEmail.setAttribute("placeholder", "Email");
-
-// const inputFirstName = document.createElement("input");
-
-// inputFirstName.setAttribute("type", "text");
-
-// inputFirstName.setAttribute("placeholder", "First Name");
-
-// const inputLastName = document.createElement("input");
-
-// inputLastName.setAttribute("type", "text");
-
-// inputLastName.setAttribute("placeholder", "Last Name");
-
-// const buttonRegister = document.createElement("button");
-
-// buttonRegister.textContent = "Register";
-
-// formCreatenew.append(inputEmail, inputFirstName, inputLastName, buttonRegister);
-
-// divMainConnction.appendChild(formCreatenew);
+spanTikTak.textContent = "Tik-Tak-Toe";
 
 
-document.body.appendChild(divMainConnction)
+divforTikTuk.appendChild(spanTikTak);
+
+
+
+
+
+
+document.body.append(divMainConnction)
